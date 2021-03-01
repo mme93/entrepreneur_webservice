@@ -12,14 +12,14 @@ import java.util.List;
 
 public class EntrepreneurAccountTable {
 
-    public  final String tableName="account";
-    public  final String coL_int_id="id";
-    public  final String col_str_username="username";
-    public  final String col_str_password="password";
-    public  final String col_str_email="email";
+    public static final String tableName="account";
+    public static final String coL_int_id="id";
+    public static final String col_str_username="username";
+    public static final String col_str_password="password";
+    public static final String col_str_email="email";
 
 
-    public List<EntrepreneurAccount> getTable(Connection con){
+    public static List<EntrepreneurAccount> getTable(Connection con){
         List<EntrepreneurAccount> entrepreneurAccountList= new ArrayList<>();
         Statement stmt = null;
         try {
