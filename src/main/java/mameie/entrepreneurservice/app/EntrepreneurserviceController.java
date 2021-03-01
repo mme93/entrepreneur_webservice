@@ -16,10 +16,10 @@ public class EntrepreneurserviceController {
         super();
         init();
     }
-
+    //Startet die Verbindung zur Datenbank
     private void init(){
         this.sqlConnector=new SqlConnector();
-        sqlConnector.getConnection();
+        sqlConnector.setConnection();
         try {
             if(sqlConnector.isConnected()){
                 DatabaseSettings.isConnected=true;

@@ -14,8 +14,10 @@ public class SqlConnector {
     public Connection getCon(){
         return  this.con;
     }
+    public void reconnect(){
 
-    public boolean getConnection(){
+    }
+    public boolean setConnection(){
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUser(DatabaseSettings.dbMaster);
         dataSource.setPassword(DatabaseSettings.dbMasterPW);
@@ -23,20 +25,6 @@ public class SqlConnector {
 
         try {
             con = dataSource.getConnection();
-            Statement stmt = con.createStatement(
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
-            System.err.println(stmt.getConnection());
-            result= stmt.executeQuery("USE "+DatabaseSettings.dbMaster);
-            result= stmt.executeQuery("SELECT * FROM account");
-            if(result!=null){
-                result.first();
-                while(!result.isAfterLast()){
-                    System.err.println(result.getInt("id"));
-                    System.err.println(result.getString("username"));
-                    result.next();
-                }
-            }
             return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
