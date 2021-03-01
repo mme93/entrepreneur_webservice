@@ -1,6 +1,7 @@
 package mameie.entrepreneurservice.app;
 
 
+import mameie.entrepreneurservice.database.error.DatabaseErrorMessage;
 import mameie.entrepreneurservice.database.objects.EntrepreneurAccount;
 import mameie.entrepreneurservice.database.settings.DatabaseSettings;
 import mameie.entrepreneurservice.database.settings.SqlConnector;
@@ -34,12 +35,17 @@ public class EntrepreneurserviceController {
     }
 
     @GetMapping("/login/{username}/{password}")
-    public void getLoginDataIsCorrect(@PathVariable("username") String username, @PathVariable("password") String password) throws Exception {
+    public String getLoginDataIsCorrect(@PathVariable("username") String username, @PathVariable("password") String password) throws Exception {
         if(this.sqlConnector!=null){
             for(EntrepreneurAccount entrepreneurAccount: EntrepreneurAccountTable.getTable(this.sqlConnector.getCon())){
-                    System.err.println(entrepreneurAccount.getPassword());
+                    if(password.equals(entrepreneurAccount.getPassword() )){
+                        if(username.equals(entrepreneurAccount.getUsername())){
+                            return "succes";
+                        }
+                    }
             }
         }
+        return DatabaseErrorMessage.wrongLoginData;
     }
 
 }
